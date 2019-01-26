@@ -203,7 +203,7 @@ local function onsave(inst, data)
   end
   if inst:HasTag("fire") then
     -- if the player is inside we gotta keep burning
-    local interior_spawner = GetWorld().components.interiorspawner
+    local interior_spawner = TheWorld.components.interiorspawner
     if not interior_spawner:IsPlayerConsideredInside(inst.interiorID) then
       data.burnt = true
     else
@@ -271,7 +271,7 @@ end
 local function creatInterior(inst, name)
   if not inst:HasTag("spawned_shop") then
 
-    local interior_spawner = GetWorld().components.interiorspawner
+    local interior_spawner = TheWorld.components.interiorspawner
 
     local ID = inst.interiorID
 
@@ -340,7 +340,7 @@ local function usedoor(inst,data)
 end
 
 local function canburn(inst)
-  local interior_spawner = GetWorld().components.interiorspawner
+  local interior_spawner = TheWorld.components.interiorspawner
   if inst.components.door then
     local interior = inst.components.door.target_interior
     if interior_spawner:IsPlayerConsideredInside(interior) then
@@ -437,9 +437,9 @@ local function makefn()
 
     inst.buyhouse = buyhouse
 
-    GetWorld():ListenForEvent("deedbought", function()
+    TheWorld:ListenForEvent("deedbought", function()
       inst.buyhouse(inst)
-      end, GetWorld())
+      end, TheWorld)
 
     inst:DoTaskInTime(0, function()
       creatInterior(inst, "playerhouse")
@@ -453,8 +453,8 @@ local function makefn()
     inst.RevealFog = function(inst)
       --print("house fog revealed")
       local x, y, z = inst.Transform:GetLocalPosition()
-      local minimap = GetWorld().minimap.MiniMap
-      local map = GetWorld().Map
+      local minimap = TheWorld.minimap.MiniMap
+      local map = TheWorld.Map
       local cx, cy, cz = map:GetTileCenterPoint(x, 0, z)
       minimap:ShowArea(cx, cy, cz, 30)
       map:VisitTile(map:GetTileCoordsAtPoint(cx, cy, cz))
@@ -463,7 +463,7 @@ local function makefn()
     inst.FocusMinimap = function(inst, bottle)
       local px, py, pz = GetPlayer().Transform:GetWorldPosition()
       local x, y, z = inst.Transform:GetLocalPosition()
-      local minimap = GetWorld().minimap.MiniMap
+      local minimap = TheWorld.minimap.MiniMap
       print("Find house on minimap (" .. x .. ", "  .. z .. ")")
       GetPlayer().HUD.controls:ToggleMap()
       minimap:Focus(x - px, z - pz, -minimap:GetZoom()) --Zoom in all the way
@@ -473,7 +473,7 @@ local function makefn()
 
     inst:ListenForEvent("usedoor", function(inst,data) usedoor(inst,data) end)
 
-    GetWorld().playerhouse = inst
+    TheWorld.playerhouse = inst
     inst.reconstructed = reconstructed
 
     return inst
