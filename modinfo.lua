@@ -8,7 +8,7 @@ description = "Slanty Shanty from Hamlet DLC of Don't Starve."
 author = "KaiserKatze"
 
 --A version number so you can ask people if they are running an old version of your mod.
-version = "1.0"
+version = "1.0.0"
 
 --This lets other players know if your mod is out of date. This typically needs to be updated every time there's a new game update.
 api_version = 10
@@ -31,4 +31,24 @@ forumthread = ""
 
 configuration_options =
 {
+  {
+    name = "IDEOLOGY",
+    label = "Can I get into other people's house?",
+    options = {
+      {
+        description = "Communism",
+        data = 0,
+        hover = "Yes, you can!"
+      }, {
+        description = "Nazism",
+        data = 1,
+        hover = "If only you are the dictactor host!"
+      }, {
+        description = "Capitalism",
+        data = 2,
+        hover = "No, you can't!"
+      }
+    },
+    default = 0,
+  },
 }

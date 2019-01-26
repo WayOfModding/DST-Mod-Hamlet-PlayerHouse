@@ -139,9 +139,7 @@ local function onhammered(inst, worker)
     inst.doortask = nil
   end
 
-  if not inst.components.fixable then
-    inst.components.lootdropper:DropLoot()
-  end
+  inst.components.lootdropper:DropLoot()
 
   SpawnPrefab("collapse_big").Transform:SetPosition(inst.Transform:GetWorldPosition())
   inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
@@ -242,7 +240,7 @@ local function onload(inst, data)
 
   if data and data.animset then
     inst.animset = data.animset
-    inst.AnimState:SetBank(inst.animset )
+    inst.AnimState:SetBank(inst.animset)
   end
   --if data and data.colornum then
   --  inst.colornum = setcolor(inst, data.colornum)
@@ -259,12 +257,12 @@ local function onload(inst, data)
 
   if data and data.prefabname then
     inst.prefabname = data.prefabname
-    inst.name = STRINGS.NAMES[string.upper( data.prefabname)]
+    inst.name = STRINGS.NAMES[string.upper(data.prefabname)]
   end
 
   if data and data.minimapicon then
     inst.minimapicon = data.minimapicon
-    inst.MiniMapEntity:SetIcon( inst.minimapicon )
+    inst.MiniMapEntity:SetIcon(inst.minimapicon)
   end
 end
 
@@ -361,7 +359,7 @@ local function makefn()
     inst.entity:AddSoundEmitter()
 
     local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon( "pig_house_sale.png" )
+    minimap:SetIcon("pig_house_sale.png")
 
     light:SetFalloff(1)
     light:SetIntensity(.5)
