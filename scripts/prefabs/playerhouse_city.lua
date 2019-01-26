@@ -356,6 +356,7 @@ local function makefn()
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
     local light = inst.entity:AddLight()
+    inst.entity:AddNetwork()
     inst.entity:AddSoundEmitter()
 
     local minimap = inst.entity:AddMiniMapEntity()
@@ -376,12 +377,9 @@ local function makefn()
 
     inst.build = "pig_house_sale"
     anim:SetBuild(inst.build)
-
     inst.animset = "pig_house_sale"
     anim:SetBank(inst.animset)
-
-    setScale(inst,inst.build)
-
+    setScale(inst, inst.build)
     anim:PlayAnimation("idle", true)
     --[[
     inst.colornum = setcolor(inst)
@@ -391,6 +389,13 @@ local function makefn()
 
     inst:AddTag("structure")
     inst:AddTag("city_hammerable")
+
+    inst:AddTag("_playerhouse_city")
+    inst.entity:SetPristine()
+    if not TheWorld.ismastersim then
+        return inst
+    end
+    inst:RemoveTag("_playerhouse_city")
 
     inst:AddComponent("lootdropper")
 
