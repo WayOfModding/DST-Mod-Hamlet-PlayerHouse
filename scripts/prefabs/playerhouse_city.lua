@@ -444,26 +444,7 @@ local function makefn()
     inst.OnSave = onsave
     inst.OnLoad = onload
 
-    inst:ListenForEvent( "onbuilt", onbuilt)
-
-    inst.RevealFog = function(inst)
-      --print("house fog revealed")
-      local x, y, z = inst.Transform:GetLocalPosition()
-      local minimap = TheWorld.minimap.MiniMap
-      local map = TheWorld.Map
-      local cx, cy, cz = map:GetTileCenterPoint(x, 0, z)
-      minimap:ShowArea(cx, cy, cz, 30)
-      map:VisitTile(map:GetTileCoordsAtPoint(cx, cy, cz))
-    end
-
-    inst.FocusMinimap = function(inst, bottle)
-      local px, py, pz = GetPlayer().Transform:GetWorldPosition()
-      local x, y, z = inst.Transform:GetLocalPosition()
-      local minimap = TheWorld.minimap.MiniMap
-      print("Find house on minimap (" .. x .. ", "  .. z .. ")")
-      GetPlayer().HUD.controls:ToggleMap()
-      minimap:Focus(x - px, z - pz, -minimap:GetZoom()) --Zoom in all the way
-    end
+    inst:ListenForEvent("onbuilt", onbuilt)
 
     inst.usesounds = {"dontstarve_DLC003/common/objects/store/door_open"}
 
