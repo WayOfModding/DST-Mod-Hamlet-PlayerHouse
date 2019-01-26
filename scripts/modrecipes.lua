@@ -7,10 +7,5 @@ Recipe(
   },
   RECIPETABS.TOWN,
   TECH.SCIENCE_TWO,
-  "pighouse_placer",
-  nil,
-  nil,
-  nil,
-  nil,
-  "images/modimages.xml"
-)
+  "pighouse_placer"
+).atlas = "images/modimages.xml"
