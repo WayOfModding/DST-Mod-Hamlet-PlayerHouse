@@ -416,10 +416,6 @@ local function makefn()
 
     inst.components.burnable:SetCanActuallyBurnFunction(canburn)
 
-    inst:AddComponent("fixable")
-    inst.components.fixable:AddRecinstructionStageData("rubble","pig_townhouse",inst.build,nil,getScale(inst,inst.build))
-    inst.components.fixable:AddRecinstructionStageData("unbuilt","pig_townhouse",inst.build,nil,getScale(inst,inst.build))
-
     inst:ListenForEvent("burntup", function(inst)
       inst.components.fixable:AddRecinstructionStageData("burnt","pig_townhouse",inst.build,1,getScale(inst,inst.build))
       if inst.doortask then
