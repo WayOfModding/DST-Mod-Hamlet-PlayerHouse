@@ -7,5 +7,10 @@ Recipe(
   },
   RECIPETABS.TOWN,
   TECH.SCIENCE_TWO,
-  "pighouse_placer"
+  "pighouse_placer",
+  nil,
+  nil,
+  nil,
+  nil,
+  "images/modimages.xml"
 )
