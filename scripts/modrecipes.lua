@@ -1,3 +1,5 @@
+local ModImagesAtlas = "images/modimages.xml"
+
 Recipe(
   "playerhouse_city",
   {
@@ -7,5 +9,5 @@ Recipe(
   },
   RECIPETABS.TOWN,
   TECH.SCIENCE_TWO,
-  "pighouse_placer"
-).atlas = "images/modimages.xml"
+  "playerhouse_city_placer"
+).atlas = ModImagesAtlas
