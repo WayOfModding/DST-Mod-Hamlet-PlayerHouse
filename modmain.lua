@@ -14,3 +14,10 @@ PrefabFiles =
 
 require "modrecipes"
 require "modstrings"
+
+local function OnLoadSim(player)
+  print("KK-TEST> TheWorld = ", _G.TheWorld)
+  _G.TheWorld:AddComponent("interiorspawner")
+  print("KK-TEST> TheWorld.components.interiorspawner = ", TheWorld.components.interiorspawner)
+end
+AddSimPostInit(OnLoadSim)
