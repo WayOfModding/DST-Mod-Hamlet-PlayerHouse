@@ -390,12 +390,16 @@ local function makefn()
     inst:AddTag("structure")
     inst:AddTag("city_hammerable")
 
+    ---------------
+
     inst:AddTag("_playerhouse_city")
     inst.entity:SetPristine()
     if not TheWorld.ismastersim then
         return inst
     end
     inst:RemoveTag("_playerhouse_city")
+
+    ---------------
 
     inst:AddComponent("lootdropper")
 
@@ -407,9 +411,7 @@ local function makefn()
 
     inst:AddComponent("door")
     inst.components.door.disabled = true
-
     inst:AddComponent("inspectable")
-
     inst.components.inspectable.getstatus = getstatus
 
     MakeSnowCovered(inst, .01)
@@ -420,7 +422,13 @@ local function makefn()
     inst.components.burnable:SetCanActuallyBurnFunction(canburn)
 
     inst:ListenForEvent("burntup", function(inst)
-      inst.components.fixable:AddRecinstructionStageData("burnt","pig_townhouse",inst.build,1,getScale(inst,inst.build))
+      inst.components.fixable:AddRecinstructionStageData(
+        "burnt",
+        "pig_townhouse",
+        inst.build,
+        1,
+        getScale(inst,inst.build)
+      )
       if inst.doortask then
         inst.doortask:Cancel()
         inst.doortask = nil
