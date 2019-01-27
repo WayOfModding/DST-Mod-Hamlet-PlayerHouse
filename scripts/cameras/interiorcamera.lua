@@ -7,7 +7,7 @@ InteriorCamera = Class(function(self, inst)
     self.currentpos = Vector3(0,0,0)
 	self.distance = 30
     self:SetDefault()
-	
+
 	--Init Interior Variables
 	self.interior_pitch = 35 -- 40
 	self.interior_heading = 0
@@ -44,9 +44,9 @@ function InteriorCamera:SetDefault()
 
     self.mindist = 15
     self.maxdist = 50 --40
-   
+
     self.mindistpitch = 30
-    self.maxdistpitch = 60--60 
+    self.maxdistpitch = 60--60
     self.paused = false
     self.shake = nil
     self.controllable = true
@@ -88,7 +88,7 @@ function InteriorCamera:SetGains(pan, heading, distance)
     self.headinggain = heading
 end
 
-function InteriorCamera:IsControllable() --Whoops looks like this is a dupe of the CanControl function 
+function InteriorCamera:IsControllable() --Whoops looks like this is a dupe of the CanControl function
     return self.controllable
 end
 
@@ -122,7 +122,7 @@ function InteriorCamera:Shake(type, duration, speed, scale)
         self.shake = CameraShake(intcam_shakeType, intcam_duration, intcam_speed, intcam_scale)
     end
     local shake_scale = math.max(0, math.min(intcam_scale/4, 1))
-    TheInputProxy:AddVibration(VIBRATION_CAMERA_SHAKE, intcam_duration, shake_scale, false)    
+    TheInputProxy:AddVibration(VIBRATION_CAMERA_SHAKE, intcam_duration, shake_scale, false)
 end
 
 function InteriorCamera:SetTarget(inst)
@@ -131,16 +131,16 @@ function InteriorCamera:SetTarget(inst)
 end
 
 function InteriorCamera:Apply()
-    
+
     --dir
     local dx = -math.cos(self.interior_pitch*DEGREES)*math.cos(self.interior_heading*DEGREES)
     local dy = -math.sin(self.interior_pitch*DEGREES)
     local dz = -math.cos(self.interior_pitch*DEGREES)*math.sin(self.interior_heading*DEGREES)
 
     --pos
-    local px = dx*(-self.interior_distance) + self.interior_currentpos.x 
-    local py = dy*(-self.interior_distance) + self.interior_currentpos.y 
-    local pz = dz*(-self.interior_distance) + self.interior_currentpos.z 
+    local px = dx*(-self.interior_distance) + self.interior_currentpos.x
+    local py = dy*(-self.interior_distance) + self.interior_currentpos.y
+    local pz = dz*(-self.interior_distance) + self.interior_currentpos.z
 
     --right
     local rx = math.cos((self.interior_heading+90)*DEGREES)
@@ -156,27 +156,27 @@ function InteriorCamera:Apply()
     TheSim:SetCameraDir(dx, dy, dz)
     TheSim:SetCameraUp(ux, uy, uz)
     TheSim:SetCameraFOV(self.interior_fov)
-	
+
     --listen dist
     local lx = 0.5*dx*(-self.interior_distance*.1) + self.interior_currentpos.x
     local ly = 0.5*dy*(-self.interior_distance*.1) + self.interior_currentpos.y
     local lz = 0.5*dz*(-self.interior_distance*.1) + self.interior_currentpos.z
-    
+
     if self.followPlayer then
 	    local target = Vector3(GetPlayer().Transform:GetWorldPosition())
 	    local source = Vector3(px,py,pz)
-	    local dir = target - source	
+	    local dir = target - source
 	    dir:Normalize()
 	    local pos = target - dir * self.distance * 0.1
 	    lx,ly,lz = pos.x,pos.y,pos.z
     end
     TheSim:SetListener(lx, ly, lz, dx, dy, dz, ux, uy, uz)
-    
+
 end
 
 local lerp = function(lower, upper, t)
    if t > 1 then t = 1 elseif t < 0 then t = 0 end
-   return lower*(1-t)+upper*t 
+   return lower*(1-t)+upper*t
 end
 
 function InteriorCamera:GetHeading()
@@ -194,23 +194,23 @@ function InteriorCamera:ZoomIn()
     -- self.distancetarget = self.distancetarget - self.zoomstep
     -- if self.distancetarget < self.mindist then
     --     self.distancetarget = self.mindist
-        
+
     -- end
     -- self.time_since_zoom = 0
-    
+
 end
 
 function InteriorCamera:ZoomOut()
  --    self.distancetarget = self.distancetarget + self.zoomstep
  --    if self.distancetarget > self.maxdist then
  --        self.distancetarget = self.maxdist
- --    end    
+ --    end
 	-- self.time_since_zoom = 0
 end
 
 function InteriorCamera:GetTimeSinceZoom()
     return self.time_since_zoom
-end 
+end
 
 function InteriorCamera:Snap()
     if self.target then
@@ -225,7 +225,7 @@ function InteriorCamera:Snap()
 
     local percent_d = (self.distance - self.mindist)/ (self.maxdist - self.mindist)
     self.pitch = lerp(self.mindistpitch, self.maxdistpitch, percent_d)
-    
+
     self:Apply()
 end
 
@@ -264,31 +264,31 @@ function InteriorCamera:Update(dt)
         end
 
         if math.abs(self.heading - self.headingtarget) > .01 then
-            self.heading = lerp(self.heading, self.headingtarget, dt*self.headinggain)    
+            self.heading = lerp(self.heading, self.headingtarget, dt*self.headinggain)
         end
 
         if math.abs(self.distance - self.distancetarget) > .01 then
-            self.distance = lerp(self.distance, self.distancetarget, dt*self.distancegain)    
+            self.distance = lerp(self.distance, self.distancetarget, dt*self.distancegain)
         end
 
         local percent_d = (self.distance - self.mindist)/ (self.maxdist - self.mindist)
         self.pitch = lerp(self.mindistpitch, self.maxdistpitch, percent_d)
 
     else
-        
+
     --	if self.time_since_zoom then
    -- 		self.time_since_zoom = self.time_since_zoom + dt
-   -- 	
-   -- 		if self.should_push_down and self.time_since_zoom > .25 --[[ and self:IsControllable() ]] then --Dave added InControllable to keep this code from fighting when trying to zoom way out 
+   --
+   -- 		if self.should_push_down and self.time_since_zoom > .25 --[[ and self:IsControllable() ]] then --Dave added InControllable to keep this code from fighting when trying to zoom way out
     --            self.distancetarget = self.distance - self.zoomstep
      --           self.time_since_zoom = 0
     --		end
    -- 	end
-        
+
 
         local pan_speed = self.pangain
 
-    
+
         if self.target then
             --self.targetpos = Vector3(self.target.Transform:GetWorldPosition()) + self.targetoffset
             local x, y, z = self.target.Transform:GetWorldPosition()
@@ -314,8 +314,8 @@ function InteriorCamera:Update(dt)
             self.interior_currentpos_original = {}
             self.interior_currentpos_original.x = self.interior_currentpos.x
             self.interior_currentpos_original.y = self.interior_currentpos.y
-            self.interior_currentpos_original.z = self.interior_currentpos.z                
-        end     
+            self.interior_currentpos_original.z = self.interior_currentpos.z
+        end
 
         self.interior_currentpos.x = lerp(self.interior_currentpos.x, self.interior_currentpos_original.x, dt * pan_speed)
         self.interior_currentpos.y = lerp(self.interior_currentpos.y, self.interior_currentpos_original.y, dt * pan_speed)
@@ -324,7 +324,7 @@ function InteriorCamera:Update(dt)
         if self.shake then
 
             local shakeOffset = self.shake:Update(dt)
-       
+
             if shakeOffset then
                 local upOffset = Vector3(0, shakeOffset.y, 0)
                 local rightOffset = self:GetRightVec() * shakeOffset.x
@@ -335,25 +335,25 @@ function InteriorCamera:Update(dt)
                 self.shake = nil
             end
         end
-        
+
         if math.abs(self.heading - self.headingtarget) > .01 then
-            self.heading = lerp(self.heading, self.headingtarget, dt*self.headinggain)    
+            self.heading = lerp(self.heading, self.headingtarget, dt*self.headinggain)
         else
             self.heading = self.headingtarget
         end
 
         if math.abs(self.distance - self.distancetarget) > .01 then
-            self.distance = lerp(self.distance, self.distancetarget, dt*self.distancegain)    
+            self.distance = lerp(self.distance, self.distancetarget, dt*self.distancegain)
         else
             self.distance = self.distancetarget
         end
-        
+
         local percent_d = (self.distance - self.mindist)/ (self.maxdist - self.mindist)
         self.pitch = lerp(self.mindistpitch, self.maxdistpitch, percent_d)
     end
     self:Apply()
 
-    
+
 end
 
 
