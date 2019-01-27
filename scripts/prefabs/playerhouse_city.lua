@@ -43,91 +43,45 @@ local function getScale(inst,build)
   return {0.75,0.75,0.75}
 end
 
-local function LightsOn(inst)
-  if not inst:HasTag("burnt") then
-    inst.Light:Enable(true)
-    inst.AnimState:PlayAnimation("lit", true)
-    inst.SoundEmitter:PlaySound("dontstarve/pig/pighut_lighton")
-    inst.lightson = true
-  end
-end
-
-local function LightsOff(inst)
-  if not inst:HasTag("burnt") then
-    inst.Light:Enable(false)
-    inst.AnimState:PlayAnimation("idle", true)
-    inst.SoundEmitter:PlaySound("dontstarve/pig/pighut_lightoff")
-    inst.lightson = false
-  end
-end
-
-local function onfar(inst)
-  --[[
-  if not inst:HasTag("burnt") then
-    if inst.components.spawner and inst.components.spawner:IsOccupied() then
-      LightsOn(inst)
-    end
-  end
-  ]]
-end
-
 local function getstatus(inst)
-  if inst:HasTag("burnt") then
-    return "BURNT"
-  elseif inst.unboarded then
+  if inst.unboarded then
     return "SOLD"
   else
     return "FORSALE"
   end
 end
 
-local function onnear(inst)
-  --[[
-  if not inst:HasTag("burnt") then
-    if inst.components.spawner and inst.components.spawner:IsOccupied() then
-      LightsOff(inst)
-    end
-  end
-  ]]
-end
-
 local function onwere(child)
-  if child.parent and not child.parent:HasTag("burnt") then
+  if child.parent then
     child.parent.SoundEmitter:KillSound("pigsound")
     child.parent.SoundEmitter:PlaySound("dontstarve/pig/werepig_in_hut", "pigsound")
   end
 end
 
 local function onnormal(child)
-  if child.parent and not child.parent:HasTag("burnt") then
+  if child.parent then
     child.parent.SoundEmitter:KillSound("pigsound")
     child.parent.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/city_pig/pig_in_house_LP", "pigsound")
   end
 end
 
 local function onoccupied(inst, child)
-  if not inst:HasTag("burnt") then
-    inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/city_pig/pig_in_house_LP", "pigsound")
-    inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
+  inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/city_pig/pig_in_house_LP", "pigsound")
+  inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
 
-    if inst.doortask then
-      inst.doortask:Cancel()
-      inst.doortask = nil
-    end
-    --inst.doortask = inst:DoTaskInTime(1, function() if not inst.components.playerprox:IsPlayerClose() then LightsOn(inst) end end)
-    inst.doortask = inst:DoTaskInTime(1, function() LightsOn(inst) end)
-    if child then
-      inst:ListenForEvent("transformwere", onwere, child)
-      inst:ListenForEvent("transformnormal", onnormal, child)
-    end
+  if inst.doortask then
+    inst.doortask:Cancel()
+    inst.doortask = nil
+  end
+  --inst.doortask = inst:DoTaskInTime(1, function() if not inst.components.playerprox:IsPlayerClose() then LightsOn(inst) end end)
+  inst.doortask = inst:DoTaskInTime(1, function() LightsOn(inst) end)
+  if child then
+    inst:ListenForEvent("transformwere", onwere, child)
+    inst:ListenForEvent("transformnormal", onnormal, child)
   end
 end
 
 local function onhammered(inst, worker)
-  if inst:HasTag("fire") and inst.components.burnable then
-    inst.components.burnable:Extinguish()
-  end
-
   inst.reconstruction_project_spawn_state = {
     bank = "pig_house",
     build = "pig_house",
@@ -151,10 +105,8 @@ local function ongusthammerfn(inst)
 end
 
 local function onhit(inst, worker)
-  if not inst:HasTag("burnt") then
-    inst.AnimState:PlayAnimation("hit")
-    inst.AnimState:PushAnimation("idle")
-  end
+  inst.AnimState:PlayAnimation("hit")
+  inst.AnimState:PushAnimation("idle")
 end
 
 local function onbuilt(inst)
@@ -196,18 +148,6 @@ local function reconstructed(inst)
 end
 
 local function onsave(inst, data)
-  if inst:HasTag("burnt") then
-    data.burnt = true
-  end
-  if inst:HasTag("fire") then
-    -- if the player is inside we gotta keep burning
-    local interior_spawner = TheWorld.components.interiorspawner
-    if not interior_spawner:IsPlayerConsideredInside(inst.interiorID) then
-      data.burnt = true
-    else
-      data.burning = true
-    end
-  end
   data.build = inst.build
   data.animset = inst.animset
   --data.colornum = inst.colornum
@@ -220,16 +160,6 @@ end
 local function onload(inst, data)
   if data and data.interiorID then
     inst.interiorID = data.interiorID
-  end
-
-  if data and data.burnt then
-    inst.components.burnable.onburnt(inst)
-  end
-
-  if data and data.burning == true then
-    inst:DoTaskInTime(0, function()
-      inst.components.burnable:Ignite(true)
-    end)
   end
 
   if data and data.build then
@@ -337,18 +267,6 @@ local function usedoor(inst,data)
   end
 end
 
-local function canburn(inst)
-  local interior_spawner = TheWorld.components.interiorspawner
-  if inst.components.door then
-    local interior = inst.components.door.target_interior
-    if interior_spawner:IsPlayerConsideredInside(interior) then
-      -- try again in 2-5 seconds
-      return false, 2 + math.random() * 3
-    end
-  end
-  return true
-end
-
 local function makefn()
 
   local function fn(Sim)
@@ -418,29 +336,6 @@ local function makefn()
 
     MakeMediumBurnable(inst, nil, nil, true)
     MakeLargePropagator(inst)
-
-    inst.components.burnable:SetCanActuallyBurnFunction(canburn)
-
-    inst:ListenForEvent("burntup", function(inst)
-      inst.components.fixable:AddRecinstructionStageData(
-        "burnt",
-        "pig_townhouse",
-        inst.build,
-        1,
-        getScale(inst,inst.build)
-      )
-      if inst.doortask then
-        inst.doortask:Cancel()
-        inst.doortask = nil
-      end
-      inst:Remove()
-    end)
-
-    inst:ListenForEvent("onignite", function(inst)
-      if inst.components.spawner then
-        inst.components.spawner:ReleaseChild()
-      end
-    end)
 
     inst.buyhouse = buyhouse
 
