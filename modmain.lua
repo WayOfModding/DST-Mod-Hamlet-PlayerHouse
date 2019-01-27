@@ -19,13 +19,16 @@ require "modstrings"
 
 local function OnLoadSim(player)
   local world = _G.TheWorld
-  print("KK-TEST> TheWorld = ", world)
-  --world:AddComponent("interiorspawner")
-  --print("KK-TEST> TheWorld.components.interiorspawner = ", world.components.interiorspawner)
 
   world.IsCave = function(self)
     return self:HasTag("cave")
   end
+
+  print("KK-TEST> IsCave() = ", world:IsCave())
+
+  print("KK-TEST> TheWorld = ", world)
+  world:AddComponent("interiorspawner")
+  print("KK-TEST> TheWorld.components.interiorspawner = ", world.components.interiorspawner)
 end
 AddSimPostInit(OnLoadSim)
 
