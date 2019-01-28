@@ -121,6 +121,7 @@ function InteriorSpawner:WallCleanUp()
   local spawnStorage = self:getSpawnStorage()
 
   wall = SpawnPrefab("generic_wall_back")
+  print("KK-TEST> wall = ", wall)
   --wall.Transform:SetPosition(x - (interior_definition.depth/2) +1 - delta,y,z)
   wall.Transform:SetPosition(spawnStorage.x, spawnStorage.y, spawnStorage.z)
   wall.setUp(wall,wallLength, nil, nil, wallWidth)
@@ -242,6 +243,7 @@ end
 
 function InteriorSpawner:getSpawnOrigin()
   local pt = nil
+  print("KK-TEST> self.interior_spawn_origin = ", self.interior_spawn_origin)
   if not self.interior_spawn_origin then
     local spawnOriginCount = 0
     for k, v in pairs(Ents) do
@@ -269,6 +271,8 @@ function InteriorSpawner:getSpawnOrigin()
 end
 
 function InteriorSpawner:getSpawnStorage()
+  print("KK-TEST> Function `InteriorSpawner:getSpawnStorage()` invoked ...")
+  print("KK-TEST> self.interior_spawn_storage =", self.interior_spawn_storage)
   local pt = nil
   if not self.interior_spawn_storage then
     for k, v in pairs(Ents) do
@@ -2370,6 +2374,7 @@ function InteriorSpawner:CleanupBlackRoomAfterHiddenDoor()
     end
   end
   local pt = self:getSpawnStorage()
+  print("KK-TEST> self:getSpawnStorage() => ", pt)
   -- collect all the things in the "interior storage area" minus the interior_spawn_origin and the player
   local interior = self.current_interior
   if interior then

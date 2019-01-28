@@ -36,6 +36,7 @@ local function OnLoadSim(player)
   printworldinfo()
 
   world:AddComponent("interiorspawner")
+  print("KK-TEST> #world.components = ", #world.components)
   print("KK-TEST> TheWorld.components.interiorspawner = ", world.components.interiorspawner)
 end
 AddSimPostInit(OnLoadSim)
