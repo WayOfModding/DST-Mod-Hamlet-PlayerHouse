@@ -2107,29 +2107,29 @@ function InteriorSpawner:GetCurrentInteriors()
 end
 
 function InteriorSpawner:CountPrefabs(prefabName)
-    local prefabCount = 0
-    local relatedInteriors = self:GetCurrentInteriors()
+  local prefabCount = 0
+  local relatedInteriors = self:GetCurrentInteriors()
 
   for i, interior in ipairs(relatedInteriors) do
-        if interior == self.current_interior then
-            local pt = self:getSpawnOrigin()
-            -- collect all the things in the "interior area" minus the interior_spawn_origin and the player
-            local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, {"interior_door"}, {"INTERIOR_LIMBO"})
-            for p, objectInInterior in ipairs(ents) do
-                if objectInInterior.prefab == prefabName then
-                    prefabCount = prefabCount + 1
-                end
-            end
-        elseif interior.object_list and (#interior.object_list > 0) then
-            for p, objectInInterior in ipairs(interior.object_list) do
-                if objectInInterior.prefab == prefabName then
-                    prefabCount = prefabCount + 1
-                end
-            end
+    if interior == self.current_interior then
+      local pt = self:getSpawnOrigin()
+      -- collect all the things in the "interior area" minus the interior_spawn_origin and the player
+      local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, {"interior_door"}, {"INTERIOR_LIMBO"})
+      for p, objectInInterior in ipairs(ents) do
+        if objectInInterior.prefab == prefabName then
+          prefabCount = prefabCount + 1
         end
+      end
+    elseif interior.object_list and (#interior.object_list > 0) then
+      for p, objectInInterior in ipairs(interior.object_list) do
+        if objectInInterior.prefab == prefabName then
+          prefabCount = prefabCount + 1
+        end
+      end
     end
+  end
 
-    return prefabCount
+  return prefabCount
 end
 
 
