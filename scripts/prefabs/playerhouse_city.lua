@@ -249,7 +249,26 @@ local function creatInterior(inst, name)
         --{name = "window_round_light", x_offset = 0, z_offset = 15/2, rotation = 90  },
       }
 
-      interior_spawner:CreateRoom("generic_interior", 15, nil, 10, name..ID, ID, addprops, {}, walltexture, floortexture, minimaptexture, nil, colorcube, nil, true, "inside", "HOUSE","WOOD")
+      interior_spawner:CreateRoom(
+        "generic_interior",
+        15,
+        nil,
+        10,
+        name..ID,
+        ID,
+        addprops,
+        {},
+        walltexture,
+        floortexture,
+        minimaptexture,
+        nil,
+        colorcube,
+        nil,
+        true,
+        "inside",
+        "HOUSE",
+        "WOOD"
+      )
 
     end
     inst.interiorID = ID
