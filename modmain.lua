@@ -17,6 +17,15 @@ PrefabFiles =
 require "modrecipes"
 require "modstrings"
 
+local function printworldinfo()
+  local world = _G.TheWorld
+
+  print("KK-TEST> TheWorld = ", world)
+  print("KK-TEST> IsCave() = ", world:IsCave())
+  print("KK-TEST> #world.components = ", #world.components)
+  print("KK-TEST> world.components = ", world.components)
+end
+
 local function OnLoadSim(player)
   local world = _G.TheWorld
 
@@ -24,9 +33,8 @@ local function OnLoadSim(player)
     return self:HasTag("cave")
   end
 
-  print("KK-TEST> IsCave() = ", world:IsCave())
+  printworldinfo()
 
-  print("KK-TEST> TheWorld = ", world)
   world:AddComponent("interiorspawner")
   print("KK-TEST> TheWorld.components.interiorspawner = ", world.components.interiorspawner)
 end
@@ -37,8 +45,5 @@ AddSimPostInit(OnLoadSim)
 if DEBUG then
   local TheInput = _G.TheInput
   local TEST_KEY = _G.KEY_V
-  TheInput:AddKeyUpHandler(TEST_KEY, function()
-    local world = _G.TheWorld
-    print("KK-TEST> IsCave() = ", world:IsCave())
-  end)
+  TheInput:AddKeyUpHandler(TEST_KEY, printworldinfo)
 end
