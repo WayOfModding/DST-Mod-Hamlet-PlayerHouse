@@ -33,11 +33,14 @@ local function OnLoadSim(player)
     return self:HasTag("cave")
   end
 
-  printworldinfo()
+  if world.ismastersim then
+    printworldinfo()
 
-  world:AddComponent("interiorspawner")
-  print("KK-TEST> #world.components = ", #world.components)
-  print("KK-TEST> TheWorld.components.interiorspawner = ", world.components.interiorspawner)
+    world:AddComponent("interiorspawner")
+
+    print("KK-TEST> #world.components = ", #world.components)
+    print("KK-TEST> TheWorld.components.interiorspawner = ", world.components.interiorspawner)
+  end
 end
 AddSimPostInit(OnLoadSim)
 
