@@ -5,8 +5,6 @@ local DEBUG = true
 
 Assets =
 {
-  Asset("ATLAS", "images/modimages.xml"),
-  Asset("IMAGE", "images/modimages.tex"),
 }
 
 PrefabFiles =
