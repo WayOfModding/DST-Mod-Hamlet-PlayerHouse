@@ -10,6 +10,17 @@ Assets =
 PrefabFiles =
 {
   "playerhouse_city",
+
+  "generic_door",
+  "generic_interior",
+  "generic_interior_art",
+  "generic_wall_back",
+  "generic_wall_side",
+
+  "wall_interior",
+  "wall_test",
+  "wallcrack_ruins",
+  "walls",
 }
 
 --------------
