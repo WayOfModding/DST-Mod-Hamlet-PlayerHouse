@@ -27,6 +27,22 @@ local assets =
 
   Asset("SOUND", "sound/pig.fsb"),
   Asset("INV_IMAGE", "playerhouse_city"),
+
+  Asset("ATLAS", "playerhouse_city.xml"),
+  Asset("ATLAS", "player_house_brick_craft.xml"),
+  Asset("ATLAS", "player_house_brick.xml"),
+  Asset("ATLAS", "player_house_cottage_craft.xml"),
+  Asset("ATLAS", "player_house_cottage.xml"),
+  Asset("ATLAS", "player_house_gothic_craft.xml"),
+  Asset("ATLAS", "player_house_gothic.xml"),
+  Asset("ATLAS", "player_house_manor_craft.xml"),
+  Asset("ATLAS", "player_house_manor.xml"),
+  Asset("ATLAS", "player_house_tudor_craft.xml"),
+  Asset("ATLAS", "player_house_tudor.xml"),
+  Asset("ATLAS", "player_house_turret_craft.xml"),
+  Asset("ATLAS", "player_house_turret.xml"),
+  Asset("ATLAS", "player_house_villa_craft.xml"),
+  Asset("ATLAS", "player_house_villa.xml"),
 }
 
 local prefabs =
