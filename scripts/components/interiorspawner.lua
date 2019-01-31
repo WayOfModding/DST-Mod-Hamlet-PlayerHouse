@@ -1,5 +1,3 @@
-local InteriorCamera = require "cameras/interiorcamera"
-
 local wallWidth = 7
 local wallLength = 24
 

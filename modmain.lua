@@ -14,8 +14,12 @@ PrefabFiles =
   "playerhouse_city",
 }
 
+--------------
+
 require "modrecipes"
 require "modstrings"
+
+--------------
 
 local function printworldinfo()
   local world = _G.TheWorld
@@ -43,6 +47,10 @@ local function OnLoadSim(player)
   end
 end
 AddSimPostInit(OnLoadSim)
+
+--------------
+
+_G.InteriorCamera = require "cameras/interiorcamera"
 
 --------------
 
