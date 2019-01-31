@@ -21,6 +21,8 @@ PrefabFiles =
   "wall_test",
   "wallcrack_ruins",
   "walls",
+
+  "prop_door",
 }
 
 --------------
