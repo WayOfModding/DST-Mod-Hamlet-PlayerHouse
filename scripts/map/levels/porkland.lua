@@ -1,19 +1,19 @@
-
-
-AddLevel(LEVELTYPE.PORKLAND, {
+AddLevel(LEVELTYPE.SURVIVAL, {
 		id="PORKLAND_DEFAULT",
-		name=STRINGS.UI.CUSTOMIZATIONSCREEN.PRESETLEVELS[1],
-		desc=STRINGS.UI.CUSTOMIZATIONSCREEN.PRESETLEVELDESC[1],
+		name="Default",
+		desc="The standard Don't Starve experience",
     location="porkland",
-    version=1,
+    version=2,
 		overrides={
-				{"roads", 			"never"},
-				{"start_setpeice", 	"PorklandStart"},
-				{"start_node",		"BG_rainforest_base"},
-				{"spring",			"noseason"},
-				{"summer",			"noseason"},
-				{"branching",		"least"},
-				{"location",		"porkland"},
+      task_set = "Porkland",
+
+			roads="never",
+			start_setpeice="PorklandStart",
+			start_node="BG_rainforest_base",
+			spring="noseason",
+			summer="noseason",
+			branching="least",
+			location="porkland",
 		},
 		tasks = {
 				"Pigtopia",
@@ -69,7 +69,8 @@ AddLevel(LEVELTYPE.PORKLAND, {
 		-- 		"Magic meadow",
 		-- 		"Frogs and bugs",
 		-- },
-		set_pieces = { --[[
+		--set_pieces = {
+    --[[
 		 	["city_1"] = { count=1, tasks={"Pigtopia_capital" } },
 		 	["city_1_2"] = { count=1, tasks={"Pigtopia_capital" } },
 			["city_1_3"] = { count=1, tasks={"Pigtopia_capital" } },
@@ -84,7 +85,7 @@ AddLevel(LEVELTYPE.PORKLAND, {
 			["city_2_4"] = { count=1, tasks={"Pigtopia"} },
 			["city_2_5"] = { count=1, tasks={"Pigtopia"} },
 			]]
-		},
+		--},
 
 		-- ordered_story_setpieces = {
 		-- 	"TeleportatoRingLayout",

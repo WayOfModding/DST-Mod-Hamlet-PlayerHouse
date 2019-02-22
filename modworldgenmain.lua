@@ -96,32 +96,31 @@ local LEVELTYPE = _G.LEVELTYPE
 LEVELTYPE["PORKLAND"] = "PORKLAND"
 require("map/terrain")
 
-modimport("map/rooms/terrain_battleground")
-modimport("map/rooms/terrain_city")
-modimport("map/rooms/terrain_cultivated")
-modimport("map/rooms/terrain_deeprainforest")
-modimport("map/rooms/terrain_interior")
-modimport("map/rooms/terrain_painted")
-modimport("map/rooms/terrain_pinacle")
-modimport("map/rooms/terrain_plains")
-modimport("map/rooms/terrain_rainforest")
-modimport("map/rooms/terrain_suburb")
+modimport("scripts/map/rooms/terrain_battleground")
+modimport("scripts/map/rooms/terrain_city")
+modimport("scripts/map/rooms/terrain_cultivated")
+modimport("scripts/map/rooms/terrain_deeprainforest")
+modimport("scripts/map/rooms/terrain_interior")
+modimport("scripts/map/rooms/terrain_painted")
+modimport("scripts/map/rooms/terrain_pinacle")
+modimport("scripts/map/rooms/terrain_plains")
+modimport("scripts/map/rooms/terrain_rainforest")
+modimport("scripts/map/rooms/terrain_suburb")
 ------------------------------------------------------------------------------
-AddTask("interior_space", {
-    locks=LOCKS.LAND_DIVIDE_5,
-    keys_given={KEYS.NONE},
-    crosslink_factor=1,
-    make_loop=true,
-    room_choices={
-      ["BG_interior_base"] = 20,
+modimport("scripts/map/tasks/porkland")
+AddTaskSet("Porkland", {
+  name = "Porkland",
+  location = "forest",
+  tasks = {
+    "interior_space",
+  },
+  numoptionaltasks = 0,
+  valid_start_tasks = {
     },
-    set_pieces={
-      {name="interior_spawnpoint"},
-      {name="interior_spawnpoint_storage"},
-    },
-    room_bg=GROUND.RAINFOREST,
-    background_room="BG_interior_base",
-    colour={r=0.01,g=0.01,b=0.01,a=0.3}
-  })
+  optionaltasks = {
+  },
+  set_pieces = {
+  },
+})
 ------------------------------------------------------------------------------
-modimport("map/levels/porkland")
+modimport("scripts/map/levels/porkland")
