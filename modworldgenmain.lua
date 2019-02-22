@@ -123,13 +123,6 @@ AddTask("interior_space", {
     colour={r=0.01,g=0.01,b=0.01,a=0.3}
   })
 ------------------------------------------------------------------------------
-local levels = require("map/levels")
-local default_idx = -1
-for i,level in ipairs(levels.sandbox_levels) do
-  if level.id == "SURVIVAL_DEFAULT" then
-    default_idx = i
-  end
-end
-table.remove(levels.sandbox_levels, default_idx)
-
+require("constants")
+_G.LEVELTYPE["PORKLAND"] = "PORKLAND"
 require("map/levels/porkland")
