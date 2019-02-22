@@ -94,3 +94,15 @@ local GROUND = _G.GROUND
 require("map/level") -- for LEVELTYPE
 local LEVELTYPE = _G.LEVELTYPE
 require("map/terrain")
+
+require("map/rooms/terrain_battleground")
+require("map/rooms/terrain_bog")
+require("map/rooms/terrain_city")
+require("map/rooms/terrain_cultivated")
+require("map/rooms/terrain_deeprainforest")
+require("map/rooms/terrain_interior")
+require("map/rooms/terrain_painted")
+require("map/rooms/terrain_pinacle")
+require("map/rooms/terrain_plains")
+require("map/rooms/terrain_rainforest")
+require("map/rooms/terrain_suburb")
