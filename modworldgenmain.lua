@@ -106,6 +106,23 @@ require("map/rooms/terrain_plains")
 require("map/rooms/terrain_rainforest")
 require("map/rooms/terrain_suburb")
 ------------------------------------------------------------------------------
+AddTask("interior_space", {
+    locks=LOCKS.LAND_DIVIDE_5,
+    keys_given={KEYS.NONE},
+    crosslink_factor=1,
+    make_loop=true,
+    room_choices={
+      ["BG_interior_base"] = 20,
+    },
+    set_pieces={
+      {name="interior_spawnpoint"},
+      {name="interior_spawnpoint_storage"},
+    },
+    room_bg=GROUND.RAINFOREST,
+    background_room="BG_interior_base",
+    colour={r=0.01,g=0.01,b=0.01,a=0.3}
+  })
+------------------------------------------------------------------------------
 local levels = require("map/levels")
 local default_idx = -1
 for i,level in ipairs(levels.sandbox_levels) do
