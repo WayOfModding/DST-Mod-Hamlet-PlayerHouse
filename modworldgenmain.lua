@@ -96,7 +96,6 @@ local LEVELTYPE = _G.LEVELTYPE
 require("map/terrain")
 
 require("map/rooms/terrain_battleground")
-require("map/rooms/terrain_bog")
 require("map/rooms/terrain_city")
 require("map/rooms/terrain_cultivated")
 require("map/rooms/terrain_deeprainforest")
