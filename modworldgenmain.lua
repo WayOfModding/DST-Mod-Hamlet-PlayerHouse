@@ -93,18 +93,19 @@ require("constants") -- for GROUND
 local GROUND = _G.GROUND
 require("map/level") -- for LEVELTYPE
 local LEVELTYPE = _G.LEVELTYPE
+LEVELTYPE["PORKLAND"] = "PORKLAND"
 require("map/terrain")
 
-require("map/rooms/terrain_battleground")
-require("map/rooms/terrain_city")
-require("map/rooms/terrain_cultivated")
-require("map/rooms/terrain_deeprainforest")
-require("map/rooms/terrain_interior")
-require("map/rooms/terrain_painted")
-require("map/rooms/terrain_pinacle")
-require("map/rooms/terrain_plains")
-require("map/rooms/terrain_rainforest")
-require("map/rooms/terrain_suburb")
+modimport("map/rooms/terrain_battleground")
+modimport("map/rooms/terrain_city")
+modimport("map/rooms/terrain_cultivated")
+modimport("map/rooms/terrain_deeprainforest")
+modimport("map/rooms/terrain_interior")
+modimport("map/rooms/terrain_painted")
+modimport("map/rooms/terrain_pinacle")
+modimport("map/rooms/terrain_plains")
+modimport("map/rooms/terrain_rainforest")
+modimport("map/rooms/terrain_suburb")
 ------------------------------------------------------------------------------
 AddTask("interior_space", {
     locks=LOCKS.LAND_DIVIDE_5,
@@ -123,6 +124,4 @@ AddTask("interior_space", {
     colour={r=0.01,g=0.01,b=0.01,a=0.3}
   })
 ------------------------------------------------------------------------------
-require("constants")
-_G.LEVELTYPE["PORKLAND"] = "PORKLAND"
-require("map/levels/porkland")
+modimport("map/levels/porkland")
