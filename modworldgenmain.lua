@@ -1,9 +1,8 @@
 local _G = GLOBAL
 local require = _G.require
+------------------------------------------------------------------------------
 local Layouts = require("map/layouts").Layouts
 local StaticLayout = require("map/static_layout")
-
-------------------------------------------------------------------------------
 --PORKLAND
 Layouts["PorklandStart"] = StaticLayout.Get("map/static_layouts/porkland_start")
 Layouts["PigRuinsEntrance1"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_1", {
@@ -87,3 +86,11 @@ Layouts["pig_ruins_nocanopy_4"] = StaticLayout.Get("map/static_layouts/pig_ruins
 Layouts["roc_nest"] = StaticLayout.Get("map/static_layouts/roc_nest")
 Layouts["roc_cave"] = StaticLayout.Get("map/static_layouts/roc_cave")
 ------------------------------------------------------------------------------
+require("map/lockandkey") -- for LOCKS and KEYS
+local LOCKS = _G.LOCKS
+local KEYS = _G.KEYS
+require("constants") -- for GROUND
+local GROUND = _G.GROUND
+require("map/level") -- for LEVELTYPE
+local LEVELTYPE = _G.LEVELTYPE
+require("map/terrain")
