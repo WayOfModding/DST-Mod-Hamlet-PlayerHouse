@@ -105,5 +105,14 @@ require("map/rooms/terrain_pinacle")
 require("map/rooms/terrain_plains")
 require("map/rooms/terrain_rainforest")
 require("map/rooms/terrain_suburb")
+------------------------------------------------------------------------------
+local levels = require("map/levels")
+local default_idx = -1
+for i,level in ipairs(levels.sandbox_levels) do
+  if level.id == "SURVIVAL_DEFAULT" then
+    default_idx = i
+  end
+end
+table.remove(levels.sandbox_levels, default_idx)
 
 require("map/levels/porkland")
