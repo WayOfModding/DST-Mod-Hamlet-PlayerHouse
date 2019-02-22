@@ -1,12 +1,14 @@
 
 
-AddLevel(LEVELTYPE.PORKLAND, { 
+AddLevel(LEVELTYPE.PORKLAND, {
 		id="PORKLAND_DEFAULT",
 		name=STRINGS.UI.CUSTOMIZATIONSCREEN.PRESETLEVELS[1],
 		desc=STRINGS.UI.CUSTOMIZATIONSCREEN.PRESETLEVELDESC[1],
-		overrides={	
+    location="porkland",
+    version=1,
+		overrides={
 				{"roads", 			"never"},
-				{"start_setpeice", 	"PorklandStart"},		
+				{"start_setpeice", 	"PorklandStart"},
 				{"start_node",		"BG_rainforest_base"},
 				{"spring",			"noseason"},
 				{"summer",			"noseason"},
@@ -25,13 +27,13 @@ AddLevel(LEVELTYPE.PORKLAND, {
 				"Deep_rainforest_2",
 				"Deep_lost_ruins_gas",
 				"Lost_Ruins_1",
-				--"Lost_Ruins_4",				
+				--"Lost_Ruins_4",
 				"Deep_rainforest_3",
 				"Deep_rainforest_mandrake",
 				"Path_to_the_others",
 				"Other_pigtopia_capital",
 				"Other_pigtopia",
-				"Other_edge_of_civilization", 
+				"Other_edge_of_civilization",
 				"this_is_how_you_get_ants",
 
 				"Deep_lost_ruins4",
@@ -41,7 +43,7 @@ AddLevel(LEVELTYPE.PORKLAND, {
 				"Land_Divide_1",
 				"Land_Divide_2",
 				"Land_Divide_3",
-				"Land_Divide_4",				
+				"Land_Divide_4",
 
 				"painted_sands",
 				"plains",
@@ -68,22 +70,22 @@ AddLevel(LEVELTYPE.PORKLAND, {
 		-- 		"Frogs and bugs",
 		-- },
 		set_pieces = { --[[
-		 	["city_1"] = { count=1, tasks={"Pigtopia_capital" } },		 	
-		 	["city_1_2"] = { count=1, tasks={"Pigtopia_capital" } },		 			 			 	
-			["city_1_3"] = { count=1, tasks={"Pigtopia_capital" } },		 	
-			["city_1_4"] = { count=1, tasks={"Pigtopia_capital" } },		 	
-		 	["city_1_5"] = { count=1, tasks={"Pigtopia_capital" } },		 			 	
-			["city_1_6"] = { count=1, tasks={"Pigtopia_capital" } },		 	
-			["city_1_7"] = { count=1, tasks={"Pigtopia_capital" } },				
+		 	["city_1"] = { count=1, tasks={"Pigtopia_capital" } },
+		 	["city_1_2"] = { count=1, tasks={"Pigtopia_capital" } },
+			["city_1_3"] = { count=1, tasks={"Pigtopia_capital" } },
+			["city_1_4"] = { count=1, tasks={"Pigtopia_capital" } },
+		 	["city_1_5"] = { count=1, tasks={"Pigtopia_capital" } },
+			["city_1_6"] = { count=1, tasks={"Pigtopia_capital" } },
+			["city_1_7"] = { count=1, tasks={"Pigtopia_capital" } },
 
-			["city_2"] = { count=1, tasks={"Pigtopia"} },		 			 	
+			["city_2"] = { count=1, tasks={"Pigtopia"} },
 			["city_2_2"] = { count=1, tasks={"Pigtopia"} },
-			["city_2_3"] = { count=1, tasks={"Pigtopia"} },			
+			["city_2_3"] = { count=1, tasks={"Pigtopia"} },
 			["city_2_4"] = { count=1, tasks={"Pigtopia"} },
 			["city_2_5"] = { count=1, tasks={"Pigtopia"} },
 			]]
 		},
-		
+
 		-- ordered_story_setpieces = {
 		-- 	"TeleportatoRingLayout",
 		-- 	"TeleportatoBoxLayout",
