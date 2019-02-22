@@ -105,3 +105,5 @@ require("map/rooms/terrain_pinacle")
 require("map/rooms/terrain_plains")
 require("map/rooms/terrain_rainforest")
 require("map/rooms/terrain_suburb")
+
+require("map/levels/porkland")
